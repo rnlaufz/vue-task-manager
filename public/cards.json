@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "title": "Task One",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet deleniti minima modi molestias nostrum quae quia veniam?",
+    "author": "Author One",
+    "dateOfCreation": "05 Aug 2021",
+    "dateOfWorkStart": "06 Aug 2021",
+    "status": "in-work",
+    "timeSpend": 26
+  },
+  {
+    "id": 2,
+    "title": "Task Two",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet deleniti minima modi molestias nostrum quae quia veniam? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet deleniti minima modi molestias nostrum quae quia veniam?",
+    "author": "Author Two",
+    "dateOfCreation": "07 Aug 2021",
+    "dateOfWorkStart": "",
+    "status": "created",
+    "timeSpend": 0
+  },
+  {
+    "id": 3,
+    "title": "Task Three",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet deleniti minima modi molestias nostrum quae quia veniam?",
+    "author": "Author Three",
+    "dateOfCreation": "05 Aug 2021",
+    "dateOfWorkStart": "05 Aug 2021",
+    "status": "in-work",
+    "timeSpend": 6
+  },
+  {
+    "id": 4,
+    "title": "Task Four",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet deleniti minima modi molestias nostrum quae quia veniam? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet deleniti minima modi molestias nostrum quae quia veniam? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet deleniti minima modi molestias nostrum quae quia veniam?",
+    "author": "Author One",
+    "dateOfCreation": "29 Jul 2021",
+    "dateOfWorkStart": "02 Aug 2021",
+    "status": "completed",
+    "timeSpend": 37
+  },
+  {
+    "id": 5,
+    "title": "Task Five",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet deleniti minima modi molestias nostrum quae quia veniam? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet deleniti minima modi molestias nostrum quae quia veniam?",
+    "author": "Author Three",
+    "dateOfCreation": "08 Aug 2021",
+    "dateOfWorkStart": "09 Aug 2021",
+    "status": "completed",
+    "timeSpend": 5
+  },
+  {
+    "id": 6,
+    "title": "Task Six",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet deleniti minima modi molestias nostrum quae quia veniam? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet deleniti minima modi molestias nostrum quae quia veniam?",
+    "author": "Author Four",
+    "dateOfCreation": "04 Aug 2021",
+    "dateOfWorkStart": "",
+    "status": "created",
+    "timeSpend": 0
+  },
+  {
+    "id": 7,
+    "title": "Task Seven",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet deleniti minima modi molestias nostrum quae quia veniam?",
+    "author": "Author Two",
+    "dateOfCreation": "15 Aug 2021",
+    "dateOfWorkStart": "",
+    "status": "created",
+    "timeSpend": 0
+  },
+  {
+    "id": 8,
+    "title": "Task Eight",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet deleniti minima modi molestias nostrum quae quia veniam?",
+    "author": "Author One",
+    "dateOfCreation": "04 Aug 2021",
+    "dateOfWorkStart": "04 Aug 2021",
+    "status": "completed",
+    "timeSpend": 8
+  },
+  {
+    "id": 9,
+    "title": "Task Nine",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet deleniti minima modi molestias nostrum quae quia veniam?",
+    "author": "Author Four",
+    "dateOfCreation": "07 Aug 2021",
+    "dateOfWorkStart": "07 Aug 2021",
+    "status": "in-work",
+    "timeSpend": 4
+  }
+]
