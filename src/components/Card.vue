@@ -1,5 +1,6 @@
 <template>
-  <li class="columns-container__column-created-cards__cards-row__item-list__card-item border-rad-5 m-5 padding-10">
+  <li @dblclick="moveCard(id)"
+      class="columns-container__column-created-cards__cards-row__item-list__card-item border-rad-5 m-5 padding-10">
     <div class="columns-container__column-created-cards__cards-row__item-list__card-item__card text-small">
       <div class="columns-container__column-created-cards__cards-row__item-list__card-item__card__header">
         <p class="columns-container__column-created-cards__cards-row__item-list__card-item__header__text disp-flex">
@@ -15,11 +16,13 @@
       </div>
       <div class="columns-container__column-created-cards__cards-row__item-list__card-item__card__body">
         <div class="columns-container__column-created-cards__cards-row__item-list__card-item__card__body__actions">
-        <button class="columns-container__column-created-cards__cards-row__item-list__card-item__card__body__actions__edit action-hover pointer no-border transparent border-rad-5">
+        <button @click="toggleEditing()"
+            class="columns-container__column-created-cards__cards-row__item-list__card-item__card__body__actions__edit action-hover pointer no-border transparent border-rad-5">
           <font-awesome-icon icon="pencil-alt" class="icon" />
         </button>
           <br>
-          <button class="columns-container__column-created-cards__cards-row__item-list__card-item__card__body__actions__delete action-hover pointer no-border transparent border-rad-5">
+          <button @click="deleteCard(id)"
+              class="columns-container__column-created-cards__cards-row__item-list__card-item__card__body__actions__delete action-hover pointer no-border transparent border-rad-5">
           <font-awesome-icon icon="trash-alt" />
           </button>
         </div>
@@ -37,6 +40,7 @@
 export default {
   name: "Card",
   props:{
+    id:Number,
   title:String,
   description:String,
   author:String,
@@ -44,13 +48,18 @@ export default {
   dateOfWorkStart:String,
   status:String,
   timeSpend:Number,
-}
 
+},
+  methods:{
+    moveCard(id){this.$emit("move-card", id);},
+    deleteCard(id) {this.$emit('delete-card', id)},
+    toggleEditing(){this.$emit('toggle-editing')}
+  },
+  emits: ['move-card', 'delete-card', 'toggle-editing']
 }
 </script>
 
 <style lang="scss" scoped>
-
 .columns-container__column-created-cards__cards-row__item-list__card-item{
   background: #fff;
   &__card__header{font-weight: 600;}
@@ -60,7 +69,6 @@ export default {
     flex-direction: row;
     &__author-creation-date{text-align: end;}
   }
-
   &__card__body__dates-start{border-top: solid 2px #f6f6f6;}
   &__card__body__actions{
     text-align: end;
@@ -77,16 +85,8 @@ export default {
       background: #b6b6b6;
       border-radius: 5px;
     }
-      &__edit{
-          top: 1%;
-      }
-
-      &__delete{
-        top: 120%;
-      }
-
+      &__edit{top: 1%}
+      &__delete{top: 120%;}
   }
-
 }
-
 </style>

@@ -3,13 +3,16 @@
     <h3 class="columns-container__column-completed-cards__header">Завершенные задачи</h3>
     <div class="columns-container__column-completed-cards__cards-row">
       <ul class="columns-container__column-created-cards__cards-row__item-list no-decorator">
-        <Card v-bind:key="card.id" v-for="card in finishedCards"
+        <Card @move-card="moveCard(card.id)" @delete-card="deleteCard(card.id)" @toggle-editing="toggleEditing"
+              v-bind:key="card.id + `F`"
+              v-for="card in this.completedCards"
+              :id="card.id"
               :title="card.title"
               :description="card.description"
               :author ="card.author"
               :dateOfCreation="card.dateOfCreation"
               :dateOfWorkStart="card.dateOfWorkStart"
-              :status="card.status"
+              status="завершена"
               :timeSpend="card.timeSpend"/>
       </ul>
     </div>
@@ -24,25 +27,20 @@ export default {
     Card
   },
   props:{
-    cards:Array
+    completedCards:Array
   },
   data(){
-    return{
-      finishedCards: []
-    }
+    return{}
   },
   methods: {
-    pickSutables(){
-      this.cards.map((card) => {
-        if(card.status === "completed"){
-          this.finishedCards.push(card)
-        }
-      })
-    }
+    newTask(){
+
+    },
+    moveCard(id){this.$emit('move-card', id);},
+    deleteCard(id) {this.$emit('delete-card', id)},
+    toggleEditing(){this.$emit('toggle-editing')}
   },
-  created() {
-    this.pickSutables()
-  }
+  emits: ['move-card', 'delete-crd', 'toggle-editing'],
 }
 </script>
 

@@ -3,18 +3,22 @@
   <h3 class="columns-container__column-created-cards__header">Созданые задачи</h3>
   <div class="columns-container__column-created-cards__cards-row">
     <ul class="columns-container__column-created-cards__cards-row__item-list no-decorator">
-      <Card v-bind:key="card.id" v-for="card in createdCards"
+      <Card @move-card="moveCard(card.id)" @delete-card="deleteCard(card.id)" @toggle-editing="toggleEditing"
+            v-bind:key="card.id +
+      `C`" v-for="card in
+      this.createdCards"
+            :id="card.id"
             :title="card.title"
             :description="card.description"
             :author ="card.author"
             :dateOfCreation="card.dateOfCreation"
             :dateOfWorkStart="card.dateOfWorkStart"
-            :status="card.status"
+            status="создана"
             :timeSpend="card.timeSpend"/>
     </ul>
   </div>
   <div class="columns-container__column-created-cards__footer disp-flex">
-    <button
+    <button @click="toggleNew()"
         class="columns-container__column-created-cards__footer__button no-border align-text-start padding-tlb-5-10-5 transparent pointer no-focus button-hover">
       <font-awesome-icon icon="plus" /> Добавить задачу
     </button>
@@ -28,24 +32,17 @@ import Card from "@/components/Card";
 export default {
   name: "CreatedColumn",
   props:{
-    cards:Array
+    createdCards:Array
   },
-  components: {
-    Card
-  },
-  data(){
-    return{
-      createdCards: []
-    }
-  },
+  components: {Card},
   methods: {
-    pickSutables(){
-      this.cards.map((card) => {
-        if(card.status === "created"){this.createdCards.push(card)}
-      })
-    }
+   newTask(){},
+    moveCard(id){this.$emit('move-card', id);},
+    deleteCard(id) {this.$emit('delete-card', id)},
+    toggleEditing(){this.$emit('toggle-editing')},
+    toggleNew(){this.$emit('toggle-new')}
   },
-  created() {this.pickSutables()}
+  emits: ['move-card', 'delete-card', 'toggle-editing', "toggle-new"],
 }
 </script>
 
