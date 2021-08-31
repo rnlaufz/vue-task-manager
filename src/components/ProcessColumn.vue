@@ -3,7 +3,9 @@
     <h3 class="columns-container__column-process-cards__header">Задачи в работе</h3>
     <div class="columns-container__column-process-cards__cards-row">
       <ul class="columns-container__column-created-cards__cards-row__item-list no-decorator">
-        <Card @move-card="moveCard(card.id)" @delete-card="deleteCard(card.id)" @toggle-editing="toggleEditing"
+        <Card @move-card="moveCard(card.id)"
+              @delete-card="deleteCard(card.id)"
+              @toggle-editing="toggleEditing(card.id, card.status)"
               v-bind:key="card.id + `P`"
               v-for="card in this.processCards"
               :id="card.id"
@@ -17,8 +19,8 @@
       </ul>
     </div>
     <div class="columns-container__column-process-cards__footer disp-flex">
-      <button  @click="toggleNew()"
-          class="columns-container__column-process-cards__footer__button no-border align-text-start padding-tlb-5-10-5 transparent pointer no-focus button-hover">
+      <button  @click="toggleNew(columnStatus)"
+          class="columns-container__column-process-cards__footer__button no-border align-text-start padding-tlb-5-10-5 pointer no-focus">
         <font-awesome-icon icon="plus" /> Добавить задачу
       </button>
     </div>
@@ -32,48 +34,44 @@ export default {
   components: {Card},
   data(){
     return {
-      countHours: 0
-    }
-  },
-  props:{
-    processCards:Array
-  },
+      countHours: 0,
+      columnStatus: "in-work"
+    }},
+  props:{processCards:Array},
   methods: {
     // Расчет времени прошедшего со дня начала работы и до текущего дня (вычисляется только если задача находится в работе)
     countTimeSpend(){
       let today = new Date()
       this.processCards.map((card) => {
         let startDate = card.dateOfWorkStart;
-        // Сохранение дня начала в численном варианте
         startDate = new Date(startDate)
         // Пересчет на дни и перевод в часы с учетом того, что один рабочий день длится 8 часов (выходные не учитываются)
         this.countHours = Number.parseInt(((today - startDate) / (1000 * 3600 * 24))*8);
         return card.timeSpend = this.countHours;
       })
     },
-    newCard(){
-
-    },
     moveCard(id){this.$emit('move-card', id);},
     deleteCard(id) {this.$emit('delete-card', id)},
-    toggleEditing(){this.$emit('toggle-editing')},
-    toggleNew(){this.$emit('toggle-new')}
+    toggleEditing(id, status){this.$emit('toggle-editing', id, status)},
+    toggleNew(status){this.$emit('toggle-new', status)}
   },
-  emits: ['move-card', 'delete-card', 'toggle-editing'],
-  created() {
-    this.countTimeSpend()
-  }
+  emits: ['move-card', 'delete-card', 'toggle-editing', "toggle-new"],
+  created() {this.countTimeSpend()},
+  updated() {this.countTimeSpend()}
 }
 </script>
 
-<style  lang="scss">
+<style lang="scss">
+@import '../components/../assets/styles/variables';
+@import '../components/../assets/styles/mixins';
+@import '../components/../assets/styles/modifiers';
 .columns-container__column-process-cards  {
       &__header{padding:0 0 5px 5px}
       &__footer{
         align-items: start;
-
           &__button{
-            width: 100%;
+            @include button-hover('hover');
+            @include transparent;
           }
         }
     }

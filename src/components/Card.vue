@@ -3,7 +3,7 @@
       class="columns-container__column-created-cards__cards-row__item-list__card-item border-rad-5 m-5 padding-10">
     <div class="columns-container__column-created-cards__cards-row__item-list__card-item__card text-small">
       <div class="columns-container__column-created-cards__cards-row__item-list__card-item__card__header">
-        <p class="columns-container__column-created-cards__cards-row__item-list__card-item__header__text disp-flex">
+        <p class="columns-container__column-created-cards__cards-row__item-list__card-item__header__text">
           <span class="columns-container__column-created-cards__cards-row__item-list__card-item__header__text__title-status">
             {{title}} - [{{status}}]
           </span>
@@ -17,12 +17,12 @@
       <div class="columns-container__column-created-cards__cards-row__item-list__card-item__card__body">
         <div class="columns-container__column-created-cards__cards-row__item-list__card-item__card__body__actions">
         <button @click="toggleEditing()"
-            class="columns-container__column-created-cards__cards-row__item-list__card-item__card__body__actions__edit action-hover pointer no-border transparent border-rad-5">
+            class="columns-container__column-created-cards__cards-row__item-list__card-item__card__body__actions__edit pointer no-border border-rad-5">
           <font-awesome-icon icon="pencil-alt" class="icon" />
         </button>
           <br>
           <button @click="deleteCard(id)"
-              class="columns-container__column-created-cards__cards-row__item-list__card-item__card__body__actions__delete action-hover pointer no-border transparent border-rad-5">
+              class="columns-container__column-created-cards__cards-row__item-list__card-item__card__body__actions__delete pointer no-border border-rad-5">
           <font-awesome-icon icon="trash-alt" />
           </button>
         </div>
@@ -59,11 +59,15 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+@import '../components/../assets/styles/variables';
+@import '../components/../assets/styles/mixins';
+@import '../components/../assets/styles/modifiers';
 .columns-container__column-created-cards__cards-row__item-list__card-item{
   background: #fff;
   &__card__header{font-weight: 600;}
   &__header__text{
+    @include display-flex;
     border-bottom: solid 2px #f6f6f6;
     justify-content: space-between;
     flex-direction: row;
@@ -85,8 +89,16 @@ export default {
       background: #b6b6b6;
       border-radius: 5px;
     }
-      &__edit{top: 1%}
-      &__delete{top: 120%;}
+      &__edit{
+        @include transparent;
+        @include action-hover('hover');
+        top: 1%
+      }
+      &__delete{
+        @include transparent;
+        @include action-hover('hover');
+        top: 120%;
+      }
   }
 }
 </style>

@@ -3,10 +3,11 @@
   <h3 class="columns-container__column-created-cards__header">Созданые задачи</h3>
   <div class="columns-container__column-created-cards__cards-row">
     <ul class="columns-container__column-created-cards__cards-row__item-list no-decorator">
-      <Card @move-card="moveCard(card.id)" @delete-card="deleteCard(card.id)" @toggle-editing="toggleEditing"
-            v-bind:key="card.id +
-      `C`" v-for="card in
-      this.createdCards"
+      <Card @move-card="moveCard(card.id)"
+            @delete-card="deleteCard(card.id)"
+            @toggle-editing="toggleEditing(card.id, card.status)"
+            v-bind:key="card.id +`C`"
+            v-for="card in this.createdCards"
             :id="card.id"
             :title="card.title"
             :description="card.description"
@@ -18,8 +19,8 @@
     </ul>
   </div>
   <div class="columns-container__column-created-cards__footer disp-flex">
-    <button @click="toggleNew()"
-        class="columns-container__column-created-cards__footer__button no-border align-text-start padding-tlb-5-10-5 transparent pointer no-focus button-hover">
+    <button @click="toggleNew(columnStatus)"
+            class="columns-container__column-created-cards__footer__button no-border align-text-start padding-tlb-5-10-5 pointer no-focus">
       <font-awesome-icon icon="plus" /> Добавить задачу
     </button>
   </div>
@@ -27,32 +28,33 @@
 </template>
 
 <script>
-
 import Card from "@/components/Card";
 export default {
   name: "CreatedColumn",
-  props:{
-    createdCards:Array
-  },
+  props:{createdCards:Array},
+  data(){return{columnStatus: "created"}},
   components: {Card},
   methods: {
-   newTask(){},
     moveCard(id){this.$emit('move-card', id);},
     deleteCard(id) {this.$emit('delete-card', id)},
-    toggleEditing(){this.$emit('toggle-editing')},
-    toggleNew(){this.$emit('toggle-new')}
+    toggleEditing(id, status){this.$emit('toggle-editing', id, status)},
+    toggleNew(status){this.$emit('toggle-new', status)}
   },
   emits: ['move-card', 'delete-card', 'toggle-editing', "toggle-new"],
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
+@import '../components/../assets/styles/variables';
+@import '../components/../assets/styles/mixins';
+@import '../components/../assets/styles/modifiers';
 .columns-container__column-created-cards{
   &__header{padding:0 0 5px 5px}
   &__footer{
     align-items: start;
     &__button{
-      width: 100%;
+      @include button-hover('hover');
+      @include transparent;
     }
   }
 }

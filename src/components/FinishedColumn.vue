@@ -3,7 +3,9 @@
     <h3 class="columns-container__column-completed-cards__header">Завершенные задачи</h3>
     <div class="columns-container__column-completed-cards__cards-row">
       <ul class="columns-container__column-created-cards__cards-row__item-list no-decorator">
-        <Card @move-card="moveCard(card.id)" @delete-card="deleteCard(card.id)" @toggle-editing="toggleEditing"
+        <Card @move-card="moveCard(card.id)"
+              @delete-card="deleteCard(card.id)"
+              @toggle-editing="toggleEditing(card.id, card.status)"
               v-bind:key="card.id + `F`"
               v-for="card in this.completedCards"
               :id="card.id"
@@ -23,24 +25,14 @@
 import Card from "@/components/Card";
 export default {
   name: "FinishedColumn",
-  components: {
-    Card
-  },
-  props:{
-    completedCards:Array
-  },
-  data(){
-    return{}
-  },
+  components: {Card},
+  props:{completedCards:Array},
   methods: {
-    newTask(){
-
-    },
     moveCard(id){this.$emit('move-card', id);},
     deleteCard(id) {this.$emit('delete-card', id)},
-    toggleEditing(){this.$emit('toggle-editing')}
+    toggleEditing(id, status){this.$emit('toggle-editing', id, status)}
   },
-  emits: ['move-card', 'delete-crd', 'toggle-editing'],
+  emits: ['move-card', 'delete-card', 'toggle-editing', "toggle-new"],
 }
 </script>
 
