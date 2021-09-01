@@ -151,9 +151,9 @@ export default {
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-@import './assets/styles/variables';
-@import './assets/styles/mixins';
-@import './assets/styles/modifiers';
+@import 'assets/styles/variables';
+@import 'assets/styles/mixins';
+@import 'assets/styles/modifiers';
 *{
   margin: 0;
   padding: 0;

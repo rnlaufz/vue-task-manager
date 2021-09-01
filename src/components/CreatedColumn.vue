@@ -45,9 +45,9 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../components/../assets/styles/variables';
-@import '../components/../assets/styles/mixins';
-@import '../components/../assets/styles/modifiers';
+@import '../assets/styles/variables';
+@import '../assets/styles/mixins';
+@import '../assets/styles/modifiers';
 .columns-container__column-created-cards{
   &__header{padding:0 0 5px 5px}
   &__footer{

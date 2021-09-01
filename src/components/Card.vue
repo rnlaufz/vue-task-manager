@@ -60,9 +60,9 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../components/../assets/styles/variables';
-@import '../components/../assets/styles/mixins';
-@import '../components/../assets/styles/modifiers';
+@import '../assets/styles/variables';
+@import '../assets/styles/mixins';
+@import '../assets/styles/modifiers';
 .columns-container__column-created-cards__cards-row__item-list__card-item{
   background: #fff;
   &__card__header{font-weight: 600;}

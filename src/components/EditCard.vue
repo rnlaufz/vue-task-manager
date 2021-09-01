@@ -75,9 +75,9 @@ export default {
 }
 </script>
 <style lang="scss">
-@import '../components/../assets/styles/variables';
-@import '../components/../assets/styles/mixins';
-@import '../components/../assets/styles/modifiers';
+@import '../assets/styles/variables';
+@import '../assets/styles/mixins';
+@import '../assets/styles/modifiers';
 .forms-container{
     @include forms-container;
     @include absolute-centered;
