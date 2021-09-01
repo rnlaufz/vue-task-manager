@@ -48,7 +48,6 @@ export default {
   dateOfWorkStart:String,
   status:String,
   timeSpend:Number,
-
 },
   methods:{
     moveCard(id){this.$emit("move-card", id);},

@@ -1,23 +1,16 @@
 <template>
   <div id="app">
     <div class="columns-container padding-10">
-      <CreatedColumn :createdCards="createdCards"
-                     @move-card="moveCard"
-                     @delete-card="deleteCard"
-                     @toggle-editing="toggleEditing"
-                     @toggle-new="toggleNew"
-      />
-      <ProcessColumn :processCards="processCards"
-                     @move-card="moveCard"
-                     @delete-card="deleteCard"
-                     @toggle-editing="toggleEditing"
-                     @toggle-new="toggleNew"
-      />
-      <FinishedColumn :completedCards="completedCards"
-                      @move-card="moveCard"
-                      @delete-card="deleteCard"
-                      @toggle-editing="toggleEditing"
-      />
+      <Column v-bind:key="column" v-for="column in columnTypes"
+              :columnType ="column"
+              :createdCards = "createdCards"
+              :processCards = "processCards"
+              :completedCards = "completedCards"
+              @move-card="moveCard"
+              @delete-card="deleteCard"
+              @toggle-editing="toggleEditing"
+              @toggle-new="toggleNew"
+              />
     </div>
       <NewCard v-if="callNewCardForm"
                @toggle-new="toggleNew"
@@ -35,20 +28,16 @@
 </template>
 
 <script>
-import CreatedColumn from "@/components/CreatedColumn";
-import ProcessColumn from "@/components/ProcessColumn";
-import FinishedColumn from "@/components/FinishedColumn";
+import Column from "./components/Column";
 import NewCard from "@/components/NewCard";
 import EditCard from "@/components/EditCard";
 import cards from "../public/cards.json";
 export default {
   name: 'App',
   components: {
-    CreatedColumn,
-    ProcessColumn,
-    FinishedColumn,
     NewCard,
-    EditCard
+    EditCard,
+    Column
   },
   data() {
     return {
@@ -60,7 +49,8 @@ export default {
       completedCards: [],
       cardID: 0,
       cardStatus: '',
-      columnStatus: ''
+      columnStatus: '',
+      columnTypes: ['created', 'in-work', 'completed']
     }
   },
   methods: {
@@ -124,10 +114,10 @@ export default {
         this.toggleNew();
     },
     toggleEditing(id, status){
-      this.cardID = id;
-      this.cardStatus = status;
+      this.cardID          = id;
+      this.cardStatus      = status;
       this.callNewCardForm = false;
-      this.callEditForm = !this.callEditForm;
+      this.callEditForm    = !this.callEditForm;
     },
     editCard(editedCard){
       this.cards.map((card) => {
@@ -155,15 +145,15 @@ export default {
 @import 'assets/styles/mixins';
 @import 'assets/styles/modifiers';
 *{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  margin:      0;
+  padding:     0;
+  box-sizing:  border-box;
   font-family: 'Roboto', sans-serif;
 }
 #app{
   position: relative;
-  width: 100%;
-  height: 100%;
+  width:    100%;
+  height:   100%;
 }
 // Компонент
 .columns-container{
