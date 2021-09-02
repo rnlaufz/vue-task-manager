@@ -3,9 +3,9 @@
     <div class="columns-container padding-10">
       <Column v-bind:key="column" v-for="column in columnTypes"
               :columnType ="column"
-              :createdCards = "createdCards"
-              :processCards = "processCards"
-              :completedCards = "completedCards"
+              :createdCards = "createdC"
+              :processCards = "process"
+              :completedCards = "completed"
               @move-card="moveCard"
               @delete-card="deleteCard"
               @toggle-editing="toggleEditing"
@@ -44,41 +44,25 @@ export default {
       callEditForm:false,
       callNewCardForm: false,
       cards: [],
-      createdCards: [],
-      processCards: [],
-      completedCards: [],
       cardID: 0,
       cardStatus: '',
       columnStatus: '',
       columnTypes: ['created', 'in-work', 'completed']
     }
   },
+  computed:{
+    createdC: function (){
+      return this.cards.filter((card) => card.status === "created")
+    },
+    process: function (){
+      return this.cards.filter((card) => card.status === "in-work")
+    },
+    completed: function () {
+      return this.cards.filter((card) => card.status === "completed")
+    }
+  },
   methods: {
-    getCards() {
-      this.cards = cards;
-      if(this.cards !== []){this.sortCards()}
-    },
-    sortCards(){
-      // Очистка и пересортировка массивов
-      this.createdCards = [];
-      this.processCards = [];
-      this.completedCards = [];
-      this.cards.map((card) => {
-        switch(card.status){
-          case "created":
-           this.createdCards.push(card)
-            break;
-          case "in-work":
-            this.processCards.push(card)
-             break;
-          case "completed":
-            this.completedCards.push(card)
-            break;
-          default:
-            return this.cards;
-        }
-      })
-    },
+    getCards() {this.cards = cards;},
     moveCard(id){
       let today = new Date();
       this.cards.map((card) => {
@@ -88,15 +72,12 @@ export default {
               card.status = "in-work";
               card.dateOfWorkStart  = today.toDateString();
               card.timeSpend = 0;
-              this.sortCards()
               break;
             case card.status === "in-work" && card.id === id:
               card.status = "completed"
-              this.sortCards()
               break;
             case card.status === "completed" && card.id === id:
               this.cards = this.cards.filter((card) => card.id !== id);
-              this.sortCards()
               break;
             default:
               return this.cards;
@@ -110,7 +91,6 @@ export default {
     },
     newCard(newCard){
         this.cards.push(newCard);
-        this.sortCards()
         this.toggleNew();
     },
     toggleEditing(id, status){
@@ -125,7 +105,6 @@ export default {
           let start = cards.indexOf(card);
           this.cards.splice(start, 1, editedCard);}
       })
-      this.sortCards();
       this.toggleEditing();
     },
     deleteCard(id){
@@ -135,7 +114,11 @@ export default {
       this.cards = this.cards.filter((card) => card.id !== id);
     }
   },
-  created(){this.getCards();}
+    created(){
+    this.getCards()
+      console.log(this.process)
+    },
+
 }
 </script>
 
